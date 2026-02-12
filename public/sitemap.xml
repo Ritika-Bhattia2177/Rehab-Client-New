@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+  
+  <!-- ==========================================
+       MAIN PAGES - Highest Priority
+       ========================================== -->
+  
+  <!-- Homepage -->
+  <url>
+    <loc>https://www.rehabcareindia.com/</loc>
+    <lastmod>2026-02-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <!-- Programs Page - High Priority -->
+  <url>
+    <loc>https://www.rehabcareindia.com/programs</loc>
+    <lastmod>2026-02-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  
+  <!-- About Page -->
+  <url>
+    <loc>https://www.rehabcareindia.com/about</loc>
+    <lastmod>2026-02-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Contact Page -->
+  <url>
+    <loc>https://www.rehabcareindia.com/contact</loc>
+    <lastmod>2026-02-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- ==========================================
+       TREATMENT PROGRAMS - Very High Priority
+       ========================================== -->
+  
+  <!-- Inpatient Program -->
+  <url>
+    <loc>https://www.rehabcareindia.com/programs/inpatient</loc>
+    <lastmod>2026-02-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Outpatient Program -->
+  <url>
+    <loc>https://www.rehabcareindia.com/programs/outpatient</loc>
+    <lastmod>2026-02-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Medical Detox -->
+  <url>
+    <loc>https://www.rehabcareindia.com/programs/detox</loc>
+    <lastmod>2026-02-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Dual Diagnosis -->
+  <url>
+    <loc>https://www.rehabcareindia.com/programs/dual-diagnosis</loc>
+    <lastmod>2026-02-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Holistic Treatment -->
+  <url>
+    <loc>https://www.rehabcareindia.com/programs/holistic</loc>
+    <lastmod>2026-02-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Relapse Prevention -->
+  <url>
+    <loc>https://www.rehabcareindia.com/programs/relapse-prevention</loc>
+    <lastmod>2026-02-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- ==========================================
+       RESOURCES & SUPPORT - High Priority
+       ========================================== -->
+  
+  <!-- Resources Hub -->
+  <url>
+    <loc>https://www.rehabcareindia.com/resources</loc>
+    <lastmod>2026-02-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Browse Centers -->
+  <url>
+    <loc>https://www.rehabcareindia.com/centers</loc>
+    <lastmod>2026-02-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  
+  <!-- Communities -->
+  <url>
+    <loc>https://www.rehabcareindia.com/communities</loc>
+    <lastmod>2026-02-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  
+  <!-- ==========================================
+       BLOG - Content Marketing
+       ========================================== -->
+  
+  <!-- Blog Main Page -->
+  <url>
+    <loc>https://www.rehabcareindia.com/blogs</loc>
+    <lastmod>2026-02-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.85</priority>
+  </url>
+  
+  <!-- Featured Blog Article: Understanding Path to Recovery -->
+  <url>
+    <loc>https://www.rehabcareindia.com/blog/understanding-path-to-recovery</loc>
+    <lastmod>2026-02-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Blog: How to Overcome Drug Addiction -->
+  <url>
+    <loc>https://www.rehabcareindia.com/blog/how-to-overcome-drug-addiction</loc>
+    <lastmod>2026-02-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  
+  <!-- Blog: Signs You Need Addiction Treatment -->
+  <url>
+    <loc>https://www.rehabcareindia.com/blog/signs-you-need-addiction-treatment</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  
+  <!-- Blog: Benefits of Rehabilitation Centers -->
+  <url>
+    <loc>https://www.rehabcareindia.com/blog/benefits-of-rehabilitation-centers</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  
+  <!-- Blog: Alcohol Recovery Process Explained -->
+  <url>
+    <loc>https://www.rehabcareindia.com/blog/alcohol-recovery-process</loc>
+    <lastmod>2026-02-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  
+  <!-- Blog: Mental Health Recovery Journey -->
+  <url>
+    <loc>https://www.rehabcareindia.com/blog/mental-health-recovery-journey</loc>
+    <lastmod>2026-02-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  
+  <!-- Blog: Family Support in Addiction Recovery -->
+  <url>
+    <loc>https://www.rehabcareindia.com/blog/family-support-addiction-recovery</loc>
+    <lastmod>2026-01-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  
+  <!-- Blog: Dual Diagnosis Treatment Guide -->
+  <url>
+    <loc>https://www.rehabcareindia.com/blog/dual-diagnosis-treatment-guide</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  
+  <!-- Blog: Relapse Prevention Strategies -->
+  <url>
+    <loc>https://www.rehabcareindia.com/blog/relapse-prevention-strategies</loc>
+    <lastmod>2026-01-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  
+  <!-- Blog: Choosing the Right Rehab Center -->
+  <url>
+    <loc>https://www.rehabcareindia.com/blog/choosing-right-rehab-center</loc>
+    <lastmod>2026-01-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  
+  <!-- Blog: Holistic Addiction Treatment -->
+  <url>
+    <loc>https://www.rehabcareindia.com/blog/holistic-addiction-treatment</loc>
+    <lastmod>2026-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  
+  <!-- ==========================================
+       REHAB CENTERS - Location Pages
+       ========================================== -->
+  
+  <!-- Mumbai Rehab Centers -->
+  <url>
+    <loc>https://www.rehabcareindia.com/centers/mumbai</loc>
+    <lastmod>2026-02-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Delhi Rehab Centers -->
+  <url>
+    <loc>https://www.rehabcareindia.com/centers/delhi</loc>
+    <lastmod>2026-02-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Bangalore Rehab Centers -->
+  <url>
+    <loc>https://www.rehabcareindia.com/centers/bangalore</loc>
+    <lastmod>2026-02-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Pune Rehab Centers -->
+  <url>
+    <loc>https://www.rehabcareindia.com/centers/pune</loc>
+    <lastmod>2026-02-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Goa Rehab Centers -->
+  <url>
+    <loc>https://www.rehabcareindia.com/centers/goa</loc>
+    <lastmod>2026-02-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- ==========================================
+       ADDITIONAL PAGES
+       ========================================== -->
+  
+  <!-- Treatment Details -->
+  <url>
+    <loc>https://www.rehabcareindia.com/treatment-details</loc>
+    <lastmod>2026-02-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Insurance Verification -->
+  <url>
+    <loc>https://www.rehabcareindia.com/insurance</loc>
+    <lastmod>2026-02-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Admissions Process -->
+  <url>
+    <loc>https://www.rehabcareindia.com/admissions</loc>
+    <lastmod>2026-02-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- FAQ -->
+  <url>
+    <loc>https://www.rehabcareindia.com/faq</loc>
+    <lastmod>2026-02-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Testimonials -->
+  <url>
+    <loc>https://www.rehabcareindia.com/testimonials</loc>
+    <lastmod>2026-02-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  
+  <!-- Virtual Tour -->
+  <url>
+    <loc>https://www.rehabcareindia.com/virtual-tour</loc>
+    <lastmod>2026-02-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  
+  <!-- Alumni -->
+  <url>
+    <loc>https://www.rehabcareindia.com/alumni</loc>
+    <lastmod>2026-02-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  
+  <!-- Advertise -->
+  <url>
+    <loc>https://www.rehabcareindia.com/advertise</loc>
+    <lastmod>2026-02-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <!-- Careers -->
+  <url>
+    <loc>https://www.rehabcareindia.com/careers</loc>
+    <lastmod>2026-02-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <!-- ==========================================
+       USER PAGES
+       ========================================== -->
+  
+  <!-- Login -->
+  <url>
+    <loc>https://www.rehabcareindia.com/login</loc>
+    <lastmod>2026-02-12</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  
+  <!-- Register -->
+  <url>
+    <loc>https://www.rehabcareindia.com/register</loc>
+    <lastmod>2026-02-12</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  
+  <!-- ==========================================
+       LEGAL PAGES
+       ========================================== -->
+  
+  <!-- Privacy Policy -->
+  <url>
+    <loc>https://www.rehabcareindia.com/privacy-policy</loc>
+    <lastmod>2026-02-12</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  
+  <!-- Terms of Service -->
+  <url>
+    <loc>https://www.rehabcareindia.com/terms-of-service</loc>
+    <lastmod>2026-02-12</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  
+</urlset>
