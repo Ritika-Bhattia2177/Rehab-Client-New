@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import ScrollToTop from '../components/ScrollToTop'
+import { API_ENDPOINTS } from '../config/api'
 
 function CenterDetails() {
   const { id } = useParams()

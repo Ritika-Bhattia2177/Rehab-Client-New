@@ -33,7 +33,10 @@ function PremiumCenters() {
 
   const filterCenters = (centers) => {
     if (filter === 'all') return centers
-    return centers.filter(center => center.state.toLowerCase().includes(filter.toLowerCase()))
+    return centers.filter(center => {
+      const state = center.state || center.location || ''
+      return state.toLowerCase().includes(filter.toLowerCase())
+    })
   }
 
   const filteredCenters = filterCenters(centers)
