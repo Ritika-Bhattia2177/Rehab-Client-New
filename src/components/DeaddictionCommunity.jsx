@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function DeaddictionCommunity() {
   return (
@@ -10,9 +11,9 @@ function DeaddictionCommunity() {
             <p className="community-description">
               Mental health and addiction-related problems are not uncommon. If you are struggling with such issues, you are not alone. Help is just a few clicks away. Find some of the popular groups and communities in the mental health and de-addiction space right here.
             </p>
-            <a href="/communities" className="btn btn-outline">
+            <Link to="/communities" className="btn btn-outline">
               Learn More <span className="arrow">→</span>
-            </a>
+            </Link>
           </div>
 
           <div className="community-image">

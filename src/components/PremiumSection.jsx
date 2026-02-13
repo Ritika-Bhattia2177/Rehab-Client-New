@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function PremiumSection() {
   const premiumCenters = [
@@ -47,9 +48,9 @@ function PremiumSection() {
                   <i className="fas fa-map-marker-alt"></i> {center.location}
                 </p>
                 <p className="premium-description">{center.description}</p>
-                <a href="#" className="btn-link">
+                <Link to={`/center/${center.id}`} className="btn-link">
                   Learn More <i className="fas fa-arrow-right"></i>
-                </a>
+                </Link>
               </div>
             </div>
           ))}

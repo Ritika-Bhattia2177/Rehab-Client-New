@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function IndiaDrugGuide() {
   return (
@@ -99,9 +100,9 @@ function IndiaDrugGuide() {
             <p className="guide-description">
               More Indians abuse addictive substances than ever before; the problem has gone from a personal to a national issue. And as addictive substances become more available in India, more and more of our people suffer addiction and dependence on drugs and alcohol.
             </p>
-            <a href="/drug-guide" className="btn btn-outline">
+            <Link to="/drug-guide" className="btn btn-outline">
               Learn More <span className="arrow">→</span>
-            </a>
+            </Link>
           </div>
         </div>
       </div>
