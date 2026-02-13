@@ -76,7 +76,7 @@ function BrowseCenters() {
   }
 
   const handleCenterClick = (center) => {
-    const centerId = center._id || center.id
+    const centerId = center.id || center._id
     navigate(`/center/${centerId}`)
   }
 
@@ -132,7 +132,7 @@ function BrowseCenters() {
               <div className="centers-grid">
                 {filteredCenters.map((center) => (
                   <div 
-                    key={center._id || center.id} 
+                    key={center.id || center._id} 
                     className="center-card"
                     onClick={() => handleCenterClick(center)}
                   >

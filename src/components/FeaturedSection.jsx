@@ -93,7 +93,7 @@ function FeaturedSection() {
 
           <div className="featured-images">
             {featuredCenters.map((center, index) => (
-              <div key={center._id || center.id} className={`featured-card featured-card-${index + 1}`}>
+              <div key={center.id || center._id} className={`featured-card featured-card-${index + 1}`}>
                 <div className="featured-card-image">
                   {center.isPremium && (
                     <span className="premium-badge">

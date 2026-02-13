@@ -21,19 +21,23 @@ function CenterDetails() {
       const data = await response.json()
       
       if (data.success) {
-        // Find by MongoDB _id or regular id
+        // Find by sequential id or MongoDB _id
         // Convert both to strings for comparison
         const foundCenter = data.data.find(c => {
-          const centerId = String(c._id || c.id)
-          const paramId = String(id)
-          return centerId === paramId || c.id === parseInt(id)
+          // Try matching by sequential id first (more reliable)
+          if (c.id && String(c.id) === String(id)) return true;
+          if (c.id === parseInt(id)) return true;
+          // Fallback to MongoDB _id
+          if (c._id && String(c._id) === String(id)) return true;
+          return false;
         })
         
         if (foundCenter) {
           setCenter(foundCenter)
         } else {
-          console.log('Center not found. Available IDs:', data.data.map(c => c._id || c.id))
+          console.log('Center not found.')
           console.log('Looking for ID:', id)
+          console.log('Available IDs:', data.data.map(c => ({ id: c.id, _id: c._id })))
         }
       }
     } catch (error) {

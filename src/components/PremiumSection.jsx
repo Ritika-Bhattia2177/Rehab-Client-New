@@ -34,7 +34,7 @@ function PremiumSection() {
 
         <div className="premium-grid">
           {premiumCenters.map((center) => (
-            <div key={center._id || center.id} className="premium-card">
+            <div key={center.id || center._id} className="premium-card">
               <div className="premium-image">
                 <div className="placeholder-image">
                   <i className="fas fa-hospital"></i>

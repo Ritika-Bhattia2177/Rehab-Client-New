@@ -62,7 +62,7 @@ function SearchResults({ results, isLoading, searchTerm }) {
         {!isLoading && results && results.length > 0 && (
           <div className="results-grid">
             {results.map((center, index) => (
-              <CenterCard key={center._id || center.id} center={center} index={index} />
+              <CenterCard key={center.id || center._id} center={center} index={index} />
             ))}
           </div>
         )}

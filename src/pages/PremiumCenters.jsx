@@ -117,7 +117,7 @@ function PremiumCenters() {
               </div>
               <div className="results-grid">
                 {filteredCenters.map(center => (
-                  <CenterCard key={center._id || center.id} center={center} />
+                  <CenterCard key={center.id || center._id} center={center} />
                 ))}
               </div>
             </>
