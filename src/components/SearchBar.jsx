@@ -174,7 +174,7 @@ function SearchBar({ onSearch }) {
               <div className="results-container">
                 {searchResults.map((center) => (
                   <div
-                    key={center.id}
+                    key={center._id || center.id}
                     className="suggestion-item result-item"
                     onClick={() => handleResultClick(center)}
                   >

@@ -22,10 +22,19 @@ function CenterDetails() {
       
       if (data.success) {
         // Find by MongoDB _id or regular id
-        const foundCenter = data.data.find(c => 
-          c._id === id || c.id === parseInt(id)
-        )
-        setCenter(foundCenter)
+        // Convert both to strings for comparison
+        const foundCenter = data.data.find(c => {
+          const centerId = String(c._id || c.id)
+          const paramId = String(id)
+          return centerId === paramId || c.id === parseInt(id)
+        })
+        
+        if (foundCenter) {
+          setCenter(foundCenter)
+        } else {
+          console.log('Center not found. Available IDs:', data.data.map(c => c._id || c.id))
+          console.log('Looking for ID:', id)
+        }
       }
     } catch (error) {
       console.error('Error fetching center:', error)
