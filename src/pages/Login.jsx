@@ -60,15 +60,21 @@ function Login() {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({
+          ...formData,
+          action: 'login'
+        })
       })
 
       const data = await response.json()
 
-      if (response.ok && data.success) {
+      if (response.ok && (data.token || data.success)) {
         // Store token and user data
-        localStorage.setItem('token', data.data.token)
-        localStorage.setItem('user', JSON.stringify(data.data))
+        const token = data.token || data.data?.token
+        const userData = data.user || data.data
+        
+        localStorage.setItem('token', token)
+        localStorage.setItem('user', JSON.stringify(userData))
         
         // Dispatch custom event to notify other components
         window.dispatchEvent(new Event('userLoggedIn'))
