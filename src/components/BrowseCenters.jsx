@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { API_ENDPOINTS } from '../config/api'
 
 function BrowseCenters() {
   const [activeTab, setActiveTab] = useState('rehab-centre')
@@ -18,7 +19,7 @@ function BrowseCenters() {
 
   const fetchCenters = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/centers')
+      const response = await fetch(API_ENDPOINTS.CENTERS)
       const data = await response.json()
       if (data.success) {
         setCenters(data.data)

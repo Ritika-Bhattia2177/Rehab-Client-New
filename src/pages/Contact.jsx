@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import { API_ENDPOINTS } from '../config/api'
 import ScrollToTop from '../components/ScrollToTop'
 
 function Contact() {
@@ -34,7 +35,7 @@ function Contact() {
     setIsSubmitting(true)
     
     try {
-      const response = await fetch('http://localhost:3000/api/messages', {
+      const response = await fetch(API_ENDPOINTS.MESSAGES, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

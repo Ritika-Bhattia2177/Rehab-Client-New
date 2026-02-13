@@ -26,7 +26,7 @@ function InquiryModal({ isOpen, onClose, type, programName }) {
     setError(null)
 
     try {
-      const response = await fetch('http://localhost:3000/api/inquiries', {
+      const response = await fetch(API_ENDPOINTS.INQUIRIES, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

@@ -23,7 +23,7 @@ function Programs() {
         params.append('category', activeCategory)
       }
 
-      const response = await fetch(`http://localhost:3000/api/services?${params.toString()}`)
+      const response = await fetch(`' + API_BASE_URL + '/api/services?${params.toString()}`)
       const data = await response.json()
 
       if (data.success) {

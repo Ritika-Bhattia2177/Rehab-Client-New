@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { API_ENDPOINTS } from '../config/api'
 
 function BookingForm({ isOpen, onClose, appointmentType = 'consultation' }) {
   const [formData, setFormData] = useState({
@@ -26,7 +27,7 @@ function BookingForm({ isOpen, onClose, appointmentType = 'consultation' }) {
     setSubmitStatus(null)
 
     try {
-      const response = await fetch('http://localhost:3000/api/appointments', {
+      const response = await fetch(API_ENDPOINTS.APPOINTMENTS, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

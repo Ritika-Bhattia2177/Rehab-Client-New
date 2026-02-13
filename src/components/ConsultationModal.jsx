@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { API_ENDPOINTS } from '../config/api'
 
 function ConsultationModal({ isOpen, onClose, type }) {
   const [formData, setFormData] = useState({
@@ -27,7 +28,7 @@ function ConsultationModal({ isOpen, onClose, type }) {
     setError(null)
 
     try {
-      const response = await fetch('http://localhost:3000/api/consultations', {
+      const response = await fetch(API_ENDPOINTS.CONSULTATIONS, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

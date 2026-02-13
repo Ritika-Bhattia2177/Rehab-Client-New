@@ -15,7 +15,7 @@ function ProgramDetail() {
   useEffect(() => {
     const fetchCareTeam = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/staff')
+        const response = await fetch('' + API_BASE_URL + '/api/staff')
         const data = await response.json()
         
         if (data.success) {

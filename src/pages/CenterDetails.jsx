@@ -16,7 +16,7 @@ function CenterDetails() {
 
   const fetchCenterDetails = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/centers')
+      const response = await fetch(API_ENDPOINTS.CENTERS)
       const data = await response.json()
       
       if (data.success) {

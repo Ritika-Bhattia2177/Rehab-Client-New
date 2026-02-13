@@ -19,7 +19,7 @@ function Blogs() {
       const params = new URLSearchParams()
       if (activeCategory !== 'all') params.append('category', activeCategory)
 
-      const response = await fetch(`http://localhost:3000/api/blogs?${params.toString()}`)
+      const response = await fetch(`' + API_BASE_URL + '/api/blogs?${params.toString()}`)
       const data = await response.json()
 
       if (data.success) {

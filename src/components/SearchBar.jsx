@@ -61,7 +61,7 @@ function SearchBar({ onSearch }) {
         params.append('location', query.trim())
       }
 
-      const url = `http://localhost:3000/api/centers?${params.toString()}`
+      const url = `${API_BASE_URL}/api/centers?${params.toString()}`
       
       const response = await fetch(url)
       const data = await response.json()

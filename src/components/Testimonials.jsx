@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { API_ENDPOINTS } from '../config/api'
 
 function Testimonials() {
   const [testimonials, setTestimonials] = useState([])
@@ -12,7 +13,7 @@ function Testimonials() {
   const fetchTestimonials = async () => {
     try {
       setLoading(true)
-      const response = await fetch('http://localhost:3000/api/testimonials')
+      const response = await fetch(API_ENDPOINTS.TESTIMONIALS)
       const data = await response.json()
 
       if (data.success) {

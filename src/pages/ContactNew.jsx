@@ -29,7 +29,7 @@ function Contact() {
     setFormStatus(null)
 
     try {
-      const response = await fetch('http://localhost:3000/api/messages', {
+      const response = await fetch('' + API_BASE_URL + '/api/messages', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

@@ -39,7 +39,7 @@ function Home() {
       }
 
       // Call the backend API
-      const response = await fetch(`http://localhost:3000/api/centers?${params.toString()}`)
+      const response = await fetch(`' + API_BASE_URL + '/api/centers?${params.toString()}`)
       const data = await response.json()
 
       if (data.success) {

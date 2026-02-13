@@ -20,7 +20,7 @@ function Resources() {
       if (activeType !== 'all') params.append('type', activeType)
       if (activeCategory !== 'all') params.append('category', activeCategory)
 
-      const response = await fetch(`http://localhost:3000/api/resources?${params.toString()}`)
+      const response = await fetch(`' + API_BASE_URL + '/api/resources?${params.toString()}`)
       const data = await response.json()
 
       if (data.success) {
@@ -54,7 +54,7 @@ function Resources() {
     
     // Track view
     try {
-      await fetch(`http://localhost:3000/api/resources/${resource._id}`)
+      await fetch(`' + API_BASE_URL + '/api/resources/${resource._id}`)
     } catch (error) {
       console.error('Error tracking view:', error)
     }
