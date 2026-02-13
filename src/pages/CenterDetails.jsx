@@ -20,7 +20,10 @@ function CenterDetails() {
       const data = await response.json()
       
       if (data.success) {
-        const foundCenter = data.data.find(c => c.id === parseInt(id))
+        // Find by MongoDB _id or regular id
+        const foundCenter = data.data.find(c => 
+          c._id === id || c.id === parseInt(id)
+        )
         setCenter(foundCenter)
       }
     } catch (error) {

@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import ScrollToTop from '../components/ScrollToTop'
 import CenterCard from '../components/CenterCard'
+import { API_ENDPOINTS } from '../config/api'
 
 function PremiumCenters() {
   const [centers, setCenters] = useState([])
@@ -19,8 +20,9 @@ function PremiumCenters() {
       const data = await response.json()
       
       if (data.success) {
-        // Filter premium centers (you can add a premium field to your data)
-        setCenters(data.data)
+        // Filter only premium centers
+        const premiumCenters = data.data.filter(c => c.isPremium === true)
+        setCenters(premiumCenters)
       }
     } catch (error) {
       console.error('Error fetching centers:', error)

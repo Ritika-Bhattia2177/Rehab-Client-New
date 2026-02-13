@@ -75,7 +75,8 @@ function BrowseCenters() {
     setFilteredCenters(filtered)
   }
 
-  const handleCenterClick = (centerId) => {
+  const handleCenterClick = (center) => {
+    const centerId = center._id || center.id
     navigate(`/center/${centerId}`)
   }
 
@@ -131,9 +132,9 @@ function BrowseCenters() {
               <div className="centers-grid">
                 {filteredCenters.map((center) => (
                   <div 
-                    key={center.id} 
+                    key={center._id || center.id} 
                     className="center-card"
-                    onClick={() => handleCenterClick(center.id)}
+                    onClick={() => handleCenterClick(center)}
                   >
                     <div className="center-image">
                       <img src={center.image} alt={center.name} />

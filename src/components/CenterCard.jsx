@@ -5,7 +5,9 @@ function CenterCard({ center, index }) {
   const navigate = useNavigate()
 
   const handleViewDetails = () => {
-    navigate(`/center/${center.id}`)
+    // Use MongoDB _id or fallback to id
+    const centerId = center._id || center.id
+    navigate(`/center/${centerId}`)
   }
 
   return (
