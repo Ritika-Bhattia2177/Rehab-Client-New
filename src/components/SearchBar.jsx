@@ -1,4 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
+import { API_ENDPOINTS } from '../config/api'
+import API_BASE_URL from '../config/api'
 
 function SearchBar({ onSearch }) {
   const [searchTerm, setSearchTerm] = useState('')
