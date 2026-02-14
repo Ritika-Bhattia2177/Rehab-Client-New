@@ -1,5 +1,12 @@
-// API Configuration
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://rehab-server.vercel.app/'
+// API Configuration (FIXED VERSION)
+
+// Remove trailing slash automatically to prevent //api errors
+const RAW_BASE_URL = import.meta.env.VITE_API_URL || "https://rehab-server.vercel.app";
+
+// This ensures:
+// https://example.com/  → https://example.com
+// https://example.com   → https://example.com
+const API_BASE_URL = RAW_BASE_URL.replace(/\/+$/, "");
 
 export const API_ENDPOINTS = {
   // Auth
