@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import ScrollToTop from '../components/ScrollToTop'
+import { API_ENDPOINTS } from '../config/api'
 
 function Resources() {
   const [activeTab, setActiveTab] = useState('guides')
@@ -1428,7 +1429,7 @@ function Resources() {
     setIsSubscribing(true)
     
     try {
-      const response = await fetch('' + API_BASE_URL + '/api/newsletter/subscribe', {
+      const response = await fetch(API_ENDPOINTS.NEWSLETTER, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import ScrollToTop from '../components/ScrollToTop'
 import BookingForm from '../components/BookingForm'
+import { API_ENDPOINTS } from '../config/api'
 
 function Programs() {
   const [services, setServices] = useState([])
@@ -23,7 +24,7 @@ function Programs() {
         params.append('category', activeCategory)
       }
 
-      const response = await fetch(`' + API_BASE_URL + '/api/services?${params.toString()}`)
+      const response = await fetch(`${API_ENDPOINTS.SERVICES}?${params.toString()}`)
       const data = await response.json()
 
       if (data.success) {

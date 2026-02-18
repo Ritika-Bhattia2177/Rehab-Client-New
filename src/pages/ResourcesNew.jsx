@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import ScrollToTop from '../components/ScrollToTop'
+import API_BASE_URL, { API_ENDPOINTS } from '../config/api'
 
 function Resources() {
   const [resources, setResources] = useState([])
@@ -20,7 +21,7 @@ function Resources() {
       if (activeType !== 'all') params.append('type', activeType)
       if (activeCategory !== 'all') params.append('category', activeCategory)
 
-      const response = await fetch(`' + API_BASE_URL + '/api/resources?${params.toString()}`)
+      const response = await fetch(`${API_ENDPOINTS.RESOURCES}?${params.toString()}`)
       const data = await response.json()
 
       if (data.success) {
@@ -54,7 +55,7 @@ function Resources() {
     
     // Track view
     try {
-      await fetch(`' + API_BASE_URL + '/api/resources/${resource._id}`)
+      await fetch(`${API_BASE_URL}/api/resources/${resource._id}`)
     } catch (error) {
       console.error('Error tracking view:', error)
     }

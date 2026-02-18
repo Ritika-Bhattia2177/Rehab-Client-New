@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import ScrollToTop from '../components/ScrollToTop'
+import { API_ENDPOINTS } from '../config/api'
 
 function Blogs() {
   const [blogs, setBlogs] = useState([])
@@ -19,7 +20,7 @@ function Blogs() {
       const params = new URLSearchParams()
       if (activeCategory !== 'all') params.append('category', activeCategory)
 
-      const response = await fetch(`' + API_BASE_URL + '/api/blogs?${params.toString()}`)
+      const response = await fetch(`${API_ENDPOINTS.BLOGS}?${params.toString()}`)
       const data = await response.json()
 
       if (data.success) {

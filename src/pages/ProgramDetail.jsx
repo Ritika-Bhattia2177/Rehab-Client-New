@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import InquiryModal from '../components/InquiryModal'
+import { API_ENDPOINTS } from '../config/api'
 
 function ProgramDetail() {
   const { id } = useParams()
@@ -15,7 +16,7 @@ function ProgramDetail() {
   useEffect(() => {
     const fetchCareTeam = async () => {
       try {
-        const response = await fetch('' + API_BASE_URL + '/api/staff')
+        const response = await fetch(API_ENDPOINTS.STAFF)
         const data = await response.json()
         
         if (data.success) {

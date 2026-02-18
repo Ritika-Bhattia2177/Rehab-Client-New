@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import ScrollToTop from '../components/ScrollToTop'
+import { API_ENDPOINTS } from '../config/api'
 
 function Blogs() {
   const [selectedCategory, setSelectedCategory] = useState('all')
@@ -191,7 +192,7 @@ function Blogs() {
     setIsSubscribing(true)
     
     try {
-      const response = await fetch('' + API_BASE_URL + '/api/newsletter/subscribe', {
+      const response = await fetch(API_ENDPOINTS.NEWSLETTER, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

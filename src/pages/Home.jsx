@@ -13,6 +13,7 @@ import Testimonials from '../components/Testimonials'
 import ProgramsSection from '../components/ProgramsSection'
 import ResourcesSection from '../components/ResourcesSection'
 import BlogSection from '../components/BlogSection'
+import { API_ENDPOINTS } from '../config/api'
 import EventsSection from '../components/EventsSection'
 import Footer from '../components/Footer'
 import ScrollToTop from '../components/ScrollToTop'
@@ -39,7 +40,7 @@ function Home() {
       }
 
       // Call the backend API
-      const response = await fetch(`' + API_BASE_URL + '/api/centers?${params.toString()}`)
+      const response = await fetch(`${API_ENDPOINTS.CENTERS}?${params.toString()}`)
       const data = await response.json()
 
       if (data.success) {

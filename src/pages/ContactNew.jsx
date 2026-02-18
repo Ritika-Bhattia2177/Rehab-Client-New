@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import ScrollToTop from '../components/ScrollToTop'
+import { API_ENDPOINTS } from '../config/api'
 
 function Contact() {
   const [formData, setFormData] = useState({
@@ -29,7 +30,7 @@ function Contact() {
     setFormStatus(null)
 
     try {
-      const response = await fetch('' + API_BASE_URL + '/api/messages', {
+      const response = await fetch(API_ENDPOINTS.MESSAGES, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
