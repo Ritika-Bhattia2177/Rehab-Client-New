@@ -47,6 +47,23 @@ function CenterDetails() {
     }
   }
 
+  const handleGetDirections = () => {
+    const addressParts = [
+      center?.address,
+      center?.city,
+      center?.state,
+      center?.zip,
+      center?.country
+    ].filter(Boolean)
+
+    const locationQuery = addressParts.length > 0
+      ? addressParts.join(', ')
+      : `${center?.name || ''}, ${center?.city || ''}, ${center?.state || ''}`
+
+    const directionsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(locationQuery.trim())}`
+    window.open(directionsUrl, '_blank', 'noopener,noreferrer')
+  }
+
   if (loading) {
     return (
       <>
@@ -390,7 +407,11 @@ function CenterDetails() {
                 <h3>Location</h3>
                 <div className="location-info">
                   <p><i className="fas fa-map-marker-alt"></i> {center.city}, {center.state}</p>
-                  <button className="direction-btn">
+                  <button
+                    className="direction-btn"
+                    type="button"
+                    onClick={handleGetDirections}
+                  >
                     <i className="fas fa-directions"></i>
                     Get Directions
                   </button>
