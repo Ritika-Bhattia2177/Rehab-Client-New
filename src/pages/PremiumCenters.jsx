@@ -10,6 +10,21 @@ function PremiumCenters() {
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState('all')
 
+  const getStateValue = (center) => (center.state || center.location || '').trim()
+
+  const normalizeState = (state) => state.toLowerCase().replace(/[^a-z]/g, '')
+
+  const formatStateLabel = (state) => {
+    if (!state) return 'Unknown'
+
+    const normalized = normalizeState(state)
+    if (normalized === 'delhi' || normalized === 'newdelhi' || normalized === 'delhincr') {
+      return 'Delhi NCR'
+    }
+
+    return state
+  }
+
   useEffect(() => {
     fetchPremiumCenters()
   }, [])
@@ -31,12 +46,29 @@ function PremiumCenters() {
     }
   }
 
-  const filterCenters = (centers) => {
-    if (filter === 'all') return centers
-    return centers.filter(center => {
-      const state = center.state || center.location || ''
-      return state.toLowerCase().includes(filter.toLowerCase())
-    })
+  const stateFilters = centers.reduce((acc, center) => {
+    const state = getStateValue(center)
+    const normalizedState = normalizeState(state)
+
+    if (!normalizedState) return acc
+
+    const existingState = acc.find(item => item.value === normalizedState)
+    if (existingState) {
+      existingState.count += 1
+    } else {
+      acc.push({
+        value: normalizedState,
+        label: formatStateLabel(state),
+        count: 1
+      })
+    }
+
+    return acc
+  }, []).sort((a, b) => a.label.localeCompare(b.label))
+
+  const filterCenters = (allCenters) => {
+    if (filter === 'all') return allCenters
+    return allCenters.filter(center => normalizeState(getStateValue(center)) === filter)
   }
 
   const filteredCenters = filterCenters(centers)
@@ -66,38 +98,17 @@ function PremiumCenters() {
               className={`filter-btn ${filter === 'all' ? 'active' : ''}`}
               onClick={() => setFilter('all')}
             >
-              All Centers
+              All Centers ({centers.length})
             </button>
-            <button 
-              className={`filter-btn ${filter === 'himachal' ? 'active' : ''}`}
-              onClick={() => setFilter('himachal')}
-            >
-              Himachal Pradesh
-            </button>
-            <button 
-              className={`filter-btn ${filter === 'punjab' ? 'active' : ''}`}
-              onClick={() => setFilter('punjab')}
-            >
-              Punjab
-            </button>
-            <button 
-              className={`filter-btn ${filter === 'maharashtra' ? 'active' : ''}`}
-              onClick={() => setFilter('maharashtra')}
-            >
-              Maharashtra
-            </button>
-            <button 
-              className={`filter-btn ${filter === 'delhi' ? 'active' : ''}`}
-              onClick={() => setFilter('delhi')}
-            >
-              Delhi NCR
-            </button>
-            <button 
-              className={`filter-btn ${filter === 'karnataka' ? 'active' : ''}`}
-              onClick={() => setFilter('karnataka')}
-            >
-              Karnataka
-            </button>
+            {stateFilters.map((stateFilter) => (
+              <button
+                key={stateFilter.value}
+                className={`filter-btn ${filter === stateFilter.value ? 'active' : ''}`}
+                onClick={() => setFilter(stateFilter.value)}
+              >
+                {stateFilter.label} ({stateFilter.count})
+              </button>
+            ))}
           </div>
         </div>
       </section>
