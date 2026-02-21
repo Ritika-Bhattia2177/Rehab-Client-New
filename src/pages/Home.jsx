@@ -26,6 +26,12 @@ function Home() {
   const handleSearch = async (searchData) => {
     setIsSearching(true)
     setSearchTerm(searchData.searchTerm || '')
+
+    if (Array.isArray(searchData.results)) {
+      setSearchResults(searchData.results)
+      setIsSearching(false)
+      return
+    }
     
     try {
       // Build query parameters

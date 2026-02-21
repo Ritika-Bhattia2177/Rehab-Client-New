@@ -73,8 +73,8 @@ function SearchResults({ results, isLoading, searchTerm }) {
             <div className="no-results-icon">
               <i className="fas fa-search"></i>
             </div>
-            <h3>No rehabilitation centers found in this location</h3>
-            <p>Try searching for a different city or state, or browse all available centers</p>
+            <h3>No rehabilitation centers found for this search</h3>
+            <p>Try different keywords like city, state, center name, or treatment type</p>
             <button className="btn-primary" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
               Refine Search
             </button>

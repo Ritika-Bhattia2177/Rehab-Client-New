@@ -1,11 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { API_ENDPOINTS } from '../config/api'
 import API_BASE_URL from '../config/api'
 
 function SearchBar({ onSearch }) {
   const [searchTerm, setSearchTerm] = useState('')
   const [showSuggestions, setShowSuggestions] = useState(false)
   const [searchResults, setSearchResults] = useState([])
+  const [allCenters, setAllCenters] = useState([])
   const [isSearching, setIsSearching] = useState(false)
   const searchRef = useRef(null)
   const searchTimeout = useRef(null)
@@ -16,6 +16,23 @@ function SearchBar({ onSearch }) {
     { icon: 'fa-map-marker-alt', text: 'Punjab Treatment Centers', search: 'Punjab' },
     { icon: 'fa-map-marker-alt', text: 'Delhi NCR Centers', search: 'Delhi' }
   ]
+
+  useEffect(() => {
+    const fetchCenters = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/centers`)
+        const data = await response.json()
+
+        if (data.success) {
+          setAllCenters(data.data || [])
+        }
+      } catch (error) {
+        console.error('Failed to load centers for search:', error)
+      }
+    }
+
+    fetchCenters()
+  }, [])
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -53,29 +70,102 @@ function SearchBar({ onSearch }) {
     }
   }, [searchTerm])
 
+  const normalizeText = (value = '') =>
+    value
+      .toString()
+      .toLowerCase()
+      .replace(/[^a-z0-9\s]/gi, ' ')
+      .replace(/\s+/g, ' ')
+      .trim()
+
+  const getCenterSearchText = (center) => {
+    const searchableFields = [
+      center.name,
+      center.city,
+      center.state,
+      center.description,
+      center.address,
+      center.category,
+      ...(Array.isArray(center.treatmentTypes) ? center.treatmentTypes : []),
+      ...(Array.isArray(center.treatments) ? center.treatments : []),
+      ...(Array.isArray(center.services) ? center.services : []),
+      ...(Array.isArray(center.specializations) ? center.specializations : []),
+      ...(Array.isArray(center.tags) ? center.tags : [])
+    ]
+
+    return normalizeText(searchableFields.filter(Boolean).join(' '))
+  }
+
+  const buildTokenList = (query) => {
+    const stopWords = new Set([
+      'rehab', 'rehabilitation', 'center', 'centers', 'in', 'near', 'me', 'for', 'the', 'and', 'of', 'at'
+    ])
+
+    const rawTokens = normalizeText(query).split(' ').filter(Boolean)
+    const filteredTokens = rawTokens.filter((token) => !stopWords.has(token))
+    return filteredTokens.length > 0 ? filteredTokens : rawTokens
+  }
+
+  const getMatchScore = (query, centerText) => {
+    const normalizedQuery = normalizeText(query)
+    const tokens = buildTokenList(query)
+    const centerWords = centerText.split(' ')
+
+    let score = 0
+
+    if (centerText.includes(normalizedQuery)) {
+      score += 8
+    }
+
+    tokens.forEach((token) => {
+      if (centerText.includes(token)) {
+        score += 3
+      } else if (centerWords.some((word) => word.startsWith(token) || token.startsWith(word))) {
+        score += 1
+      }
+    })
+
+    return score
+  }
+
   const performSearch = async (query) => {
+    const trimmedQuery = query.trim()
+
+    if (!trimmedQuery) {
+      setSearchResults([])
+      onSearch?.({ searchTerm: '', results: [] })
+      return
+    }
+
     setIsSearching(true)
     setShowSuggestions(true)
     
     try {
-      const params = new URLSearchParams()
-      if (query) {
-        params.append('location', query.trim())
+      let centersToSearch = allCenters
+
+      if (centersToSearch.length === 0) {
+        const response = await fetch(`${API_BASE_URL}/api/centers`)
+        const data = await response.json()
+        centersToSearch = data.success ? (data.data || []) : []
+        setAllCenters(centersToSearch)
       }
 
-      const url = `${API_BASE_URL}/api/centers?${params.toString()}`
-      
-      const response = await fetch(url)
-      const data = await response.json()
+      const rankedResults = centersToSearch
+        .map((center) => {
+          const centerText = getCenterSearchText(center)
+          const score = getMatchScore(trimmedQuery, centerText)
+          return { center, score }
+        })
+        .filter((item) => item.score > 0)
+        .sort((a, b) => b.score - a.score)
+        .map((item) => item.center)
 
-      if (data.success) {
-        setSearchResults(data.data || [])
-      } else {
-        setSearchResults([])
-      }
+      setSearchResults(rankedResults)
+      onSearch?.({ searchTerm: trimmedQuery, results: rankedResults })
     } catch (error) {
       console.error('Search error:', error)
       setSearchResults([])
+      onSearch?.({ searchTerm: trimmedQuery, results: [] })
     } finally {
       setIsSearching(false)
     }
