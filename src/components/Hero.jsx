@@ -2,7 +2,7 @@ import React from 'react'
 import SearchBar from './SearchBar'
 import TrustBadges from './TrustBadges'
 
-function Hero({ onSearch }) {
+function Hero() {
   // Using actual rehab center images
   const decorativeImages = [
     { id: 1, url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400', alt: 'Mountain Serenity Recovery Center', position: 'top-left' },
@@ -35,7 +35,7 @@ function Hero({ onSearch }) {
             Connect with trusted rehabilitation centers, expert care, and compassionate support across the nation.
           </p>
 
-          <SearchBar onSearch={onSearch} />
+          <SearchBar />
           <TrustBadges />
         </div>
       </div>

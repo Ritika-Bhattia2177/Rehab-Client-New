@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import API_BASE_URL from '../config/api'
 
 function SearchBar({ onSearch }) {
@@ -9,6 +10,7 @@ function SearchBar({ onSearch }) {
   const [isSearching, setIsSearching] = useState(false)
   const searchRef = useRef(null)
   const searchTimeout = useRef(null)
+  const navigate = useNavigate()
 
   const suggestions = [
     { icon: 'fa-map-marker-alt', text: 'Himachal Pradesh Centers', search: 'Himachal' },
@@ -46,15 +48,12 @@ function SearchBar({ onSearch }) {
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
-  // Live search as user types
   useEffect(() => {
     if (searchTerm.length >= 2) {
-      // Clear previous timeout
       if (searchTimeout.current) {
         clearTimeout(searchTimeout.current)
       }
 
-      // Set new timeout for debounced search
       searchTimeout.current = setTimeout(() => {
         performSearch(searchTerm)
       }, 300)
@@ -139,7 +138,7 @@ function SearchBar({ onSearch }) {
 
     setIsSearching(true)
     setShowSuggestions(true)
-    
+
     try {
       let centersToSearch = allCenters
 
@@ -175,6 +174,7 @@ function SearchBar({ onSearch }) {
     if (!searchTerm) {
       return
     }
+
     performSearch(searchTerm)
   }
 
@@ -184,7 +184,13 @@ function SearchBar({ onSearch }) {
   }
 
   const handleResultClick = (center) => {
-    alert(`Viewing details for ${center.name}\n\nLocation: ${center.city}, ${center.state}\nRating: ${center.rating}/5\nBeds: ${center.beds}`)
+    const centerId = center.id || center._id
+    if (!centerId) {
+      return
+    }
+
+    setShowSuggestions(false)
+    navigate(`/center/${centerId}`)
   }
 
   const handleInputFocus = () => {
@@ -230,7 +236,6 @@ function SearchBar({ onSearch }) {
         </button>
       </div>
 
-      {/* Search Suggestions/Results */}
       {showSuggestions && (
         <div className="search-suggestions">
           {isSearching && (
