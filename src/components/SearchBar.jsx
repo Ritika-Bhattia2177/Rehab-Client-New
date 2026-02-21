@@ -78,13 +78,23 @@ function SearchBar({ onSearch }) {
       .trim()
 
   const getCenterSearchText = (center) => {
+    const locationText = [center.location, center.city, center.state, center.address]
+      .filter(Boolean)
+      .join(' ')
+
+    const locationTokens = normalizeText(locationText)
+      .split(' ')
+      .filter(Boolean)
+
     const searchableFields = [
       center.name,
       center.city,
       center.state,
+      center.location,
       center.description,
       center.address,
       center.category,
+      ...locationTokens,
       ...(Array.isArray(center.treatmentTypes) ? center.treatmentTypes : []),
       ...(Array.isArray(center.treatments) ? center.treatments : []),
       ...(Array.isArray(center.services) ? center.services : []),
@@ -97,7 +107,8 @@ function SearchBar({ onSearch }) {
 
   const buildTokenList = (query) => {
     const stopWords = new Set([
-      'rehab', 'rehabilitation', 'center', 'centers', 'in', 'near', 'me', 'for', 'the', 'and', 'of', 'at'
+      'rehab', 'rehabilitation', 'center', 'centers', 'in', 'near', 'me', 'for', 'the', 'and', 'of', 'at',
+      'drug', 'alcohol', 'addiction', 'treatment', 'facility', 'facilities', 'hospital', 'clinic'
     ])
 
     const rawTokens = normalizeText(query).split(' ').filter(Boolean)
@@ -109,6 +120,7 @@ function SearchBar({ onSearch }) {
     const normalizedQuery = normalizeText(query)
     const tokens = buildTokenList(query)
     const centerWords = centerText.split(' ')
+    const compactCenterText = centerText.replace(/\s+/g, '')
 
     let score = 0
 
@@ -119,6 +131,8 @@ function SearchBar({ onSearch }) {
     tokens.forEach((token) => {
       if (centerText.includes(token)) {
         score += 3
+      } else if (compactCenterText.includes(token)) {
+        score += 2
       } else if (centerWords.some((word) => word.startsWith(token) || token.startsWith(word))) {
         score += 1
       }
