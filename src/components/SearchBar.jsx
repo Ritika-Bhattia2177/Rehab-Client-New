@@ -77,32 +77,37 @@ function SearchBar({ onSearch }) {
       .replace(/\s+/g, ' ')
       .trim()
 
-  const getCenterSearchText = (center) => {
-    const locationText = [center.location, center.city, center.state, center.address]
-      .filter(Boolean)
-      .join(' ')
-
-    const locationTokens = normalizeText(locationText)
-      .split(' ')
-      .filter(Boolean)
-
-    const searchableFields = [
-      center.name,
-      center.city,
-      center.state,
-      center.location,
-      center.description,
-      center.address,
-      center.category,
-      ...locationTokens,
-      ...(Array.isArray(center.treatmentTypes) ? center.treatmentTypes : []),
-      ...(Array.isArray(center.treatments) ? center.treatments : []),
-      ...(Array.isArray(center.services) ? center.services : []),
-      ...(Array.isArray(center.specializations) ? center.specializations : []),
-      ...(Array.isArray(center.tags) ? center.tags : [])
+  const extractSearchableValues = (center) => {
+    const collectionFields = [
+      center.treatmentTypes,
+      center.treatments,
+      center.services,
+      center.specializations,
+      center.tags
     ]
 
-    return normalizeText(searchableFields.filter(Boolean).join(' '))
+    return [
+      center.name,
+      center.state,
+      center.city,
+      center.location,
+      center.address,
+      center.description,
+      center.category,
+      ...collectionFields.flatMap((field) => (Array.isArray(field) ? field : []))
+    ]
+      .filter(Boolean)
+      .map((field) => normalizeText(field))
+  }
+
+  const getCenterSearchMeta = (center) => {
+    const fields = extractSearchableValues(center)
+    const stateText = normalizeText(center.state)
+    return {
+      fields,
+      combinedText: fields.join(' '),
+      stateText
+    }
   }
 
   const buildTokenList = (query) => {
@@ -116,11 +121,12 @@ function SearchBar({ onSearch }) {
     return filteredTokens.length > 0 ? filteredTokens : rawTokens
   }
 
-  const getMatchScore = (query, centerText) => {
+  const getMatchScore = (query, centerMeta) => {
     const normalizedQuery = normalizeText(query)
     const tokens = buildTokenList(query)
+    const centerText = centerMeta.combinedText
+    const stateText = centerMeta.stateText
     const centerWords = centerText.split(' ')
-    const compactCenterText = centerText.replace(/\s+/g, '')
 
     let score = 0
 
@@ -128,15 +134,42 @@ function SearchBar({ onSearch }) {
       score += 8
     }
 
+    const hasStateMatch = Boolean(stateText) && tokens.some((token) => {
+      if (stateText.includes(token) || token.includes(stateText)) {
+        return true
+      }
+
+      return stateText
+        .split(' ')
+        .some((stateWord) => stateWord.startsWith(token) || token.startsWith(stateWord))
+    })
+
+    if (hasStateMatch) {
+      // If query includes a state keyword, ensure state matches are strongly ranked.
+      score += 15
+    }
+
     tokens.forEach((token) => {
-      if (centerText.includes(token)) {
+      const tokenMatched = centerMeta.fields.some((fieldText) => {
+        if (fieldText.includes(token)) {
+          return true
+        }
+
+        return fieldText
+          .split(' ')
+          .some((word) => word.startsWith(token) || token.startsWith(word))
+      })
+
+      if (tokenMatched) {
         score += 3
-      } else if (compactCenterText.includes(token)) {
-        score += 2
       } else if (centerWords.some((word) => word.startsWith(token) || token.startsWith(word))) {
         score += 1
       }
     })
+
+    if (hasStateMatch && score > 0) {
+      score += 5
+    }
 
     return score
   }
@@ -165,8 +198,8 @@ function SearchBar({ onSearch }) {
 
       const rankedResults = centersToSearch
         .map((center) => {
-          const centerText = getCenterSearchText(center)
-          const score = getMatchScore(trimmedQuery, centerText)
+          const centerMeta = getCenterSearchMeta(center)
+          const score = getMatchScore(trimmedQuery, centerMeta)
           return { center, score }
         })
         .filter((item) => item.score > 0)
@@ -302,7 +335,7 @@ function SearchBar({ onSearch }) {
                         <i className="fas fa-map-marker-alt"></i>
                         {center.city}, {center.state}
                       </div>
-                      <div className="result-description">{center.description.substring(0, 100)}...</div>
+                      <div className="result-description">{(center.description || center.address || 'Rehabilitation center').substring(0, 100)}...</div>
                     </div>
                     {center.isPremium && (
                       <span className="result-badge">Premium</span>
