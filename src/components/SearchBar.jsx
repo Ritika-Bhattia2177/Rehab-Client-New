@@ -196,7 +196,7 @@ function SearchBar({ onSearch }) {
         setAllCenters(centersToSearch)
       }
 
-      const rankedResults = centersToSearch
+      const localResults = centersToSearch
         .map((center) => {
           const centerMeta = getCenterSearchMeta(center)
           const score = getMatchScore(trimmedQuery, centerMeta)
@@ -206,8 +206,23 @@ function SearchBar({ onSearch }) {
         .sort((a, b) => b.score - a.score)
         .map((item) => item.center)
 
-      setSearchResults(rankedResults)
-      onSearch?.({ searchTerm: trimmedQuery, results: rankedResults })
+      let globalResults = []
+
+      if (localResults.length === 0) {
+        try {
+          const globalResponse = await fetch(`${API_BASE_URL}/api/global-search?q=${encodeURIComponent(trimmedQuery)}`)
+          const globalData = await globalResponse.json()
+          globalResults = globalData.success ? (globalData.data || []) : []
+        } catch (globalError) {
+          globalResults = []
+          console.error('Global search error:', globalError)
+        }
+      }
+
+      const finalResults = localResults.length > 0 ? localResults : globalResults
+
+      setSearchResults(finalResults)
+      onSearch?.({ searchTerm: trimmedQuery, results: finalResults })
     } catch (error) {
       console.error('Search error:', error)
       setSearchResults([])
