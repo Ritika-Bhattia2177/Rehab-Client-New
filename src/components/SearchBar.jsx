@@ -174,6 +174,56 @@ function SearchBar({ onSearch }) {
     return score
   }
 
+  const normalizeCenterResponse = (payload) => {
+    if (!payload) {
+      return []
+    }
+
+    if (Array.isArray(payload)) {
+      return payload
+    }
+
+    if (Array.isArray(payload.data)) {
+      return payload.data
+    }
+
+    if (Array.isArray(payload.results)) {
+      return payload.results
+    }
+
+    return []
+  }
+
+  const fetchRemoteSearchResults = async (query) => {
+    const endpoints = [
+      `${API_BASE_URL}/api/global-search?q=${encodeURIComponent(query)}`,
+      `${API_BASE_URL}/api/global-search?query=${encodeURIComponent(query)}`,
+      `${API_BASE_URL}/api/centers/search?q=${encodeURIComponent(query)}`,
+      `${API_BASE_URL}/api/centers?search=${encodeURIComponent(query)}`,
+      `${API_BASE_URL}/api/centers?q=${encodeURIComponent(query)}`
+    ]
+
+    const settledResponses = await Promise.allSettled(
+      endpoints.map(async (endpoint) => {
+        const response = await fetch(endpoint)
+        if (!response.ok) {
+          return []
+        }
+
+        const data = await response.json()
+        if (data.success === false) {
+          return []
+        }
+
+        return normalizeCenterResponse(data)
+      })
+    )
+
+    return settledResponses
+      .filter((result) => result.status === 'fulfilled')
+      .flatMap((result) => result.value || [])
+  }
+
   const performSearch = async (query) => {
     const trimmedQuery = query.trim()
 
@@ -208,18 +258,29 @@ function SearchBar({ onSearch }) {
 
       let globalResults = []
 
-      if (localResults.length === 0) {
-        try {
-          const globalResponse = await fetch(`${API_BASE_URL}/api/global-search?q=${encodeURIComponent(trimmedQuery)}`)
-          const globalData = await globalResponse.json()
-          globalResults = globalData.success ? (globalData.data || []) : []
-        } catch (globalError) {
-          globalResults = []
-          console.error('Global search error:', globalError)
-        }
+      try {
+        globalResults = await fetchRemoteSearchResults(trimmedQuery)
+      } catch (globalError) {
+        globalResults = []
+        console.error('Global search error:', globalError)
       }
 
-      const finalResults = localResults.length > 0 ? localResults : globalResults
+      const deduped = new Map()
+
+      ;[...localResults, ...globalResults].forEach((center) => {
+        const uniqueKey = center.id || center._id || `${center.name}-${center.city}-${center.state}`
+        if (uniqueKey) {
+          deduped.set(uniqueKey, center)
+        }
+      })
+
+      const finalResults = Array.from(deduped.values())
+        .map((center) => {
+          const centerMeta = getCenterSearchMeta(center)
+          return { center, score: getMatchScore(trimmedQuery, centerMeta) }
+        })
+        .sort((a, b) => b.score - a.score)
+        .map((item) => item.center)
 
       setSearchResults(finalResults)
       onSearch?.({ searchTerm: trimmedQuery, results: finalResults })
