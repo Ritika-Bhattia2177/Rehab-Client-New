@@ -279,6 +279,7 @@ function SearchBar({ onSearch }) {
           const centerMeta = getCenterSearchMeta(center)
           return { center, score: getMatchScore(trimmedQuery, centerMeta) }
         })
+        .filter((item) => item.score > 0)
         .sort((a, b) => b.score - a.score)
         .map((item) => item.center)
 
